@@ -64,7 +64,7 @@ microsecond. *)
 (*....................................................................
 Exercise 1. The `NativeLazyStreams` module, found in the file
 `nativeLazyStreams.ml`, is an incomplete reimplementation of the
-`LazyStreams` module from the last lab, but using OCaml's native
+`LazyStreams` module from the previous lab, but using OCaml's native
 `Lazy` module. Complete this implementation by implementing `smap`,
 `smap2`, and `sfilter` in that file. You may want to refer to the last
 lab, especially the `LazyStreams` module provided there and the lab
@@ -198,42 +198,44 @@ let _ = Printf.printf "The 2000th prime is %d\n" (nth primes 1999) ;;
 exception Done ;;
 
 let prime_timing () =
-  print_endline "Testing sieve based on native lazy streams";
-  let n = ref 1 in
+  print_endline "   n      time for first n primes (seconds)";
+  let n = ref 100 in
   let finished = ref false in
-  while not !finished && !n < 100 do
-    let _l, t = Absbook.call_timed (first !n) primes in
-    Printf.printf "%3d -- %12.8f\n" !n t;
-    n := succ !n;
-    if t > 0.5 then finished := true
+  while not !finished && !n <= 2000 do
+    let _l, msecs = Absbook.call_timed (first !n) primes in
+    Printf.printf "%4d -- %12.8f\n" !n (msecs /. 1000.);
+    n := !n + 100;
+    if msecs > 500. then finished := true
   done ;;
 
+let _ = prime_timing () ;;
+  
 (* Running `prime_timing ()` to generate the table below reveals that
    the memoizing provides a dramatic increase in performance,
    calculating 2000 primes in the time it previously took for 3
    primes.
 
-    n       time for first n primes (seconds)
-   100 --   0.00000691
-   200 --   0.00001097
-   300 --   0.00001502
-   400 --   0.00002098
-   500 --   0.00005603
-   600 --   0.00003290
-   700 --   0.00004196
-   800 --   0.00004387
-   900 --   0.00005007
-  1000 --   0.00005794
-  1100 --   0.00006008
-  1200 --   0.00006819
-  1300 --   0.00007606
-  1400 --   0.00008297
-  1500 --   0.00008893
-  1600 --   0.00009608
-  1700 --   0.00059795
-  1800 --   0.00007510
-  1900 --   0.00007606
-  2000 --   0.00008106
+         n      time for first n primes (seconds)
+       100 --   0.00001097
+       200 --   0.00001383
+       300 --   0.00002098
+       400 --   0.00002694
+       500 --   0.00003290
+       600 --   0.00003982
+       700 --   0.00004506
+       800 --   0.00005198
+       900 --   0.00005794
+      1000 --   0.00006485
+      1100 --   0.00007200
+      1200 --   0.00007820
+      1300 --   0.00008488
+      1400 --   0.00009203
+      1500 --   0.00010204
+      1600 --   0.00010514
+      1700 --   0.00011015
+      1800 --   0.00011706
+      1900 --   0.00012589
+      2000 --   0.00013709
  *)
 
 (*====================================================================

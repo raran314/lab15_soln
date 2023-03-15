@@ -1,5 +1,5 @@
 (*
-			     CS 51 Lab 15
+                             CS 51 Lab 15
                          Native Lazy Streams
  *)
 

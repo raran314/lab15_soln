@@ -19,10 +19,12 @@ This gives us a simple way to approximate pi. Below, we generate a
 stream for the terms of this formula and then compute sums of the
 terms to approximate pi.
 
-YOU SHOULD NOT NEED TO CHANGE ANYTHING IN THIS FILE.
+      *************************************************************
+      YOU SHOULD NOT NEED TO CHANGE ANYTHING IN THIS FILE.
 
-NOTE THAT THIS FILE WILL NOT COMPILE UNTIL YOU HAVE COMPLETED THE
-NativeLazyStreams MODULE IN nativeLazyStreams.ml.
+      NOTE THAT THIS FILE WILL NOT COMPILE UNTIL YOU HAVE COMPLETED
+      THE NativeLazyStreams MODULE IN nativeLazyStreams.ml.
+      *************************************************************
  *)
 
 open NativeLazyStreams ;;
@@ -86,10 +88,10 @@ let within (epsilon : float) (s : float stream) : int * float =
    result. After uncommenting the last expression in this file, you
    can try it yourself with:
 
-    % ocamlbuild pi.byte
-    Finished, 5 targets (0 cached) in 00:00:00.
-    % ./pi.byte
-    Pi within 0.001000 is 3.141093 after 1999 steps
+      % ocamlbuild pi.byte
+      Finished, 5 targets (0 cached) in 00:00:00.
+      % ./pi.byte
+      Pi within 0.001000 is 3.141093 after 1999 steps
 
    Any more digits than this will take a long time. See the rest of
    the lab for speeding up the process. *)

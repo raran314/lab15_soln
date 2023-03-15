@@ -1,5 +1,5 @@
 (*
-			     CS 51 Lab 15
+                             CS 51 Lab 15
                          Native Lazy Streams
  *)
 
@@ -7,7 +7,9 @@
 An implementation of lazy streams using OCaml's native `Lazy` module,
 along with with some useful functions. 
 
+                    ******************************
                     YOU SHOULD NOT EDIT THIS FILE.
+                    ******************************
  *)
 
 type 'a stream_internal = Cons of 'a * 'a stream
@@ -15,6 +17,7 @@ type 'a stream_internal = Cons of 'a * 'a stream
 
 (* head strm -- Returns the first element of `strm`. *)
 val head : 'a stream -> 'a ;;
+
 (* tail strm -- Returns a stream containing the remaining elements of
    `strm`. *)
 val tail : 'a stream -> 'a stream ;;
