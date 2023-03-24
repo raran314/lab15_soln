@@ -59,7 +59,7 @@ let fib42 : int Lazy.t =
     - : int = 267914296
 
 The first time through takes 13 seconds, the second less than a
-microsecond. *)
+microsecond. Try it on your own computer. *)
 
 (*....................................................................
 Exercise 1. The `NativeLazyStreams` module, found in the file
@@ -71,8 +71,8 @@ lab, especially the `LazyStreams` module provided there and the lab
 solution's discussion of its exercise on `sfilter`.
 ....................................................................*)
 
-(* Now we can redo the Fibonacci example. First, we open the
-`NativeLazyStreams` module so we can use its components more
+(* Now we can redo the Fibonacci example from the textbook. First, we
+open the `NativeLazyStreams` module so we can use its components more
 easily. *)
 
 open NativeLazyStreams
@@ -126,12 +126,13 @@ geometric sequence as an infinite stream, where the first argument is
 the initial value in the stream, and each successive value is
 multiplied by the second argument. For example:
 
+    # first 10 (geo 1. 2.) ;;
+    - : float list = [1.; 2.; 4.; 8.; 16.; 32.; 64.; 128.; 256.; 512.]
+
     # first 10 (geo 0.5 0.5) ;;
     - : float list =
     [0.5; 0.25; 0.125; 0.0625; 0.03125; 0.015625; 0.0078125; 
      0.00390625; 0.001953125; 0.0009765625]
-    # first 10 (geo 1. 2.) ;;
-    - : float list = [1.; 2.; 4.; 8.; 16.; 32.; 64.; 128.; 256.; 512.]
 
 For more information on geometric sequences, see
 <https://en.wikipedia.org/wiki/Geometric_progression>.
@@ -152,7 +153,7 @@ solution.
       fun () -> Cons (0, smap ((+) 1) nats) ;;
 
     let not_div_by (n : int) (m : int) : bool = 
-      not (m mod n = 0) ;;
+      m mod n <> 0 ;;
 
     let rec sieve (s : int stream) : int stream =
       let Cons (h, t) = s () in
@@ -171,7 +172,7 @@ let rec nats : int stream =
   lazy (Cons (0, smap ((+) 1) nats)) ;;
  
 let not_div_by (n : int) (m : int) : bool = 
-  not (m mod n = 0) ;;
+  m mod n <> 0 ;;
 
 let rec sieve (s : int stream) : int stream =
   lazy (Cons (head s,
